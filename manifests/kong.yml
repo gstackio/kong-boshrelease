@@ -10,7 +10,7 @@ instance_groups:
   networks: [{name: default}]
   jobs:
   - name: kong
-    release: kong
+    release: kong-ce
     properties: 
       kong_conf: |
         database = postgres
@@ -21,7 +21,7 @@ instance_groups:
         pg_database = kong
 
   - name: smoke-tests
-    release: kong
+    release: kong-ce
 
   - name: postgres
     release: postgres
@@ -52,7 +52,7 @@ update:
   serial: false
 
 releases:
-- name: kong
+- name: kong-ce
   version: "1.0.0"
   url: https://github.com/gstackio/kong-ce-boshrelease/releases/download/v1.0.0/kong-ce-1.0.0.tgz
   sha1: f829807866f70361b7593747bf079eeb8dd6f775
