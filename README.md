@@ -114,7 +114,12 @@ necessary on top of the BOSH Stemcell.
 
 ## Contributing
 
-Pull requests are welcome!
+Pull requests are welcome! See in our [open issues][issues] the possible
+improvements that you could contribute to. They are prioritized by
+[milestones][milestones] that each expose a specific goal.
+
+[issues]: https://github.com/gstackio/kong-ce-boshrelease/issues
+[milestones]: https://github.com/gstackio/kong-ce-boshrelease/milestones
 
 As a notice to release authors that contribute here, this BOSH Release is
 based on a [Git LFS blobstore][git-lfs-blobstore]. This is quite uncommon, so
