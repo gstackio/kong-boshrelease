@@ -12,14 +12,13 @@ export PATH=$PATH:${BOSH_INSTALL_TARGET}/bin
 
 ORVERSION=1.11.2.4
 PCREVERSION=8.41
-OPENSSLVERSION=1.1.0g
+OPENSSLVERSION=1.0.2m
 
 # installation instructions found here: https://openresty.org/en/installation.html
-#mkdir $BOSH_INSTALL_TARGET/openresty
-tar -xzvf openresty/openresty-${ORVERSION}.tar.gz
-tar -xzvf openresty/pcre-${PCREVERSION}.tar.gz
-tar -xzvf openresty/openssl-${OPENSSLVERSION}.tar.gz
 
+tar -zxf openresty/openresty-${ORVERSION}.tar.gz
+tar -zxf openresty/pcre-${PCREVERSION}.tar.gz
+tar -zxf openresty/openssl-${OPENSSLVERSION}.tar.gz
 
 pushd openssl-${OPENSSLVERSION}
 ./config \
@@ -38,6 +37,7 @@ export OPENSSL_SSL_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/openssl/include"
 export OPENSSL_SSL_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lssl"
 # configuration taken from kong installation instructions here: https://getkong.org/install/source/
 ./configure \
+  --with-openssl=../openssl-${OPENSSLVERSION} \
   --with-pcre=../pcre-${PCREVERSION} \
   --with-pcre-jit \
   --with-ipv6 \
