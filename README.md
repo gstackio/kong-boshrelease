@@ -1,4 +1,4 @@
-# BOSH Release for Kong API Gateway (Gstack fork)
+# BOSH Release for Kong Community Edition (CE)
 
 This BOSH release and deployment manifest deploy a cluster of [Kong][kong-ce].
 
