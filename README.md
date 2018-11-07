@@ -83,6 +83,35 @@ git pull
 bosh deploy manifests/kong.yml
 ```
 
+### Clustering
+
+Clustering Kong API Gateways should work out of the box, with a mere updating
+of the [`instances:` property][instances-prop] in the deployment manifest.
+Kong nodes will synchronize their state on the shared PostgreSQL database,
+with [some caching implemented][db_update_frequency_doc].
+
+[instances-prop]: https://github.com/gstackio/kong-ce-boshrelease/blob/v1.0.0/manifests/kong.yml#L7
+[db_update_frequency_doc]: https://docs.konghq.com/0.11.x/clustering/#1-db_update_frequency-default-5s
+
+You can update the `db_update_frequency` value (default is 5 seconds), adding
+it to the [`kong_conf` property][kong_conf_prop] in the deployment manifest.
+Please note though, that the default deployment manifest doesn't provide you
+with any High Availability (HA) or horizontal scaling solution for the
+PostgreSQL database. If you stick to it, this will still be a single point of
+failure.
+
+[kong_conf_prop]: https://github.com/gstackio/kong-ce-boshrelease/blob/v1.0.0/manifests/kong.yml#L15
+
+If you are concerned with HA design for Kong, we encourage you to have a look
+at the [Cassandra BOSH Release][cassandra-release] that we're also
+contributing to. You'll need a basic understading of the Cassandra technology
+(tombstones, repairs, etc) but building a BOSH deployment manifest that
+integrates Kong with Cassandra should be pretty straightforward, just reading
+[Kong's documentation][cassandra-config-doc].
+
+[cassandra-release]: https://github.com/orange-cloudfoundry/cassandra-boshrelease
+[cassandra-config-doc]: https://docs.konghq.com/0.11.x/configuration/#cassandra-settings
+
 ## Contributing
 
 As a notice to release authors that contribute here, this BOSH Release is
