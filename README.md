@@ -82,3 +82,15 @@ cd kong-ce-boshrelease
 git pull
 bosh deploy manifests/kong.yml
 ```
+
+## Contributing
+
+As a notice to release authors that contribute here, this BOSH Release is
+based on a [Git LFS blobstore][git-lfs-blobstore]. This is quite uncommon, so
+please read [Ruben Koster's post][git-lfs-blobstore] first before continuing.
+
+[git-lfs-blobstore]: https://starkandwayne.com/blog/bosh-releases-with-git-lfs/
+
+Contrarily to common practice with BOSH, blobs are commited to Git, because
+they are backed by Git LFS, and `bosh sync-blobs` is no more necessary because
+you get the correct final blobs with `git pull`.

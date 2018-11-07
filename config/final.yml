@@ -1,6 +1,6 @@
 ---
 name: kong-ce
 blobstore:
-  provider: s3
+  provider: local
   options:
-    bucket_name: kong-boshrelease
+    blobstore_path: final_blobs
