@@ -2,6 +2,6 @@
 name: openresty
 dependencies: []
 files:
-- openresty/openresty-1.11.2.4.tar.gz
-- openresty/pcre-8.41.tar.gz
-- openresty/openssl-1.1.0g.tar.gz
+- openresty/openresty-*.tar.gz
+- openresty/pcre-*.tar.gz
+- openresty/openssl-*.tar.gz

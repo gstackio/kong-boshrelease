@@ -3,6 +3,6 @@ name: kong
 dependencies: 
 - openresty
 files:
-- kong/kong-0.11.1.tar.gz
-- kong/luarocks-2.4.3.tar.gz
-- kong/git-2.9.5.tar.gz
+- kong/kong-*.tar.gz
+- kong/luarocks-*.tar.gz
+- kong/git-*.tar.gz
