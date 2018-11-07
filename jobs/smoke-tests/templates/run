@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -eo pipefail -x
+
+# query the 'info' endpoint
+curl -fsSL -X GET -i \
+    --url http://localhost:8001/
+echo -e "\n"
+
+# create an API
+curl -fsSL -X POST -i \
+    --url http://localhost:8001/apis/ \
+    --data 'name=example-api' \
+    --data 'hosts=example.com' \
+    --data 'upstream_url=http://mockbin.org'
+echo -e "\n"
+
+# get the created API
+curl -fsSL -X GET -i \
+    --url http://localhost:8001/apis/example-api
+echo -e "\n"
+
+# send a request through the API
+curl -fsSL -X GET -i \
+    --url http://localhost:8000/ \
+    --header 'Host: example.com'
+echo -e "\n"
+
+# delete the API
+curl -fsSL -X DELETE -i \
+    --url http://localhost:8001/apis/example-api
+
+exit 0

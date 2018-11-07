@@ -20,6 +20,9 @@ instance_groups:
         pg_password = kong
         pg_database = kong
 
+  - name: smoke-tests
+    release: kong
+
   - name: postgres
     release: postgres
     properties:
