@@ -1,0 +1,29 @@
+name: kong-ce
+version: 1.0.0
+commit_hash: f47909d
+uncommitted_changes: false
+jobs:
+- name: kong
+  version: e1f0613d607bee54662df7169dd11d5223389b69
+  fingerprint: e1f0613d607bee54662df7169dd11d5223389b69
+  sha1: c161e7f013d9d6b8c4512757a9ff7ca5dd4e0cee
+- name: smoke-tests
+  version: 2a39e81294aac0a19b458067e36cc405bcbb2397
+  fingerprint: 2a39e81294aac0a19b458067e36cc405bcbb2397
+  sha1: 33cc03727ebbc59e6fa51dbd07cbb6d836a004cb
+packages:
+- name: kong
+  version: f90980dabb3600235077e3888233e606538436fa
+  fingerprint: f90980dabb3600235077e3888233e606538436fa
+  sha1: 2f2bf05b526afb26db6d8477b28b65f6a65c6730
+  dependencies:
+  - openresty
+- name: openresty
+  version: 12cd06d235049a4e87c6403a379aa2eb1dc6cfd5
+  fingerprint: 12cd06d235049a4e87c6403a379aa2eb1dc6cfd5
+  sha1: c5a018528ba0fdb2db6ef301282867b2b5ac6580
+  dependencies: []
+license:
+  version: f936286105f0824a9bdc7ed8aefdcb3a16f02c51
+  fingerprint: f936286105f0824a9bdc7ed8aefdcb3a16f02c51
+  sha1: 17cd71cdcfce714efca20c5fabf44828e5a56f00
