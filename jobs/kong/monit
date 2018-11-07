@@ -1,5 +1,5 @@
 check process kong
-  with pidfile /var/vcap/sys/run/kong/pid
+  with pidfile /var/vcap/sys/run/kong/nginx.pid
   start program "/var/vcap/jobs/kong/bin/ctl start"
   stop program "/var/vcap/jobs/kong/bin/ctl stop"
   group vcap

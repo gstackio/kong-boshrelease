@@ -1,8 +1,6 @@
 ---
 name: kong
 
-director_uuid: 63ddb6a6-d6fe-40e1-b16b-2ff6b2034c79
-
 instance_groups:
 - name: kong
   azs: [z1, z2, z3]
