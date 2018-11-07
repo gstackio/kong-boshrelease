@@ -13,32 +13,6 @@ Gateway easily.
 
 [depl-manifest]: ./manifests/kong.yml
 
-## Notice
-
-This is a forked version of the Community's [kong-boshrelease][kong-release],
-that sticks to a compiled install design, over a Docker-based design. Here we
-have fixed many minor glitches for Kong to actually work, and in terms of BOSH
-Release authoring, we have generally brought more best practice in.
-
-[kong-release]: https://github.com/cloudfoundry-community/kong-boshrelease
-
-Here we have abandoned the Docker container design, because it breaks the
-general Operating System update workflow proposed by BOSH with Stemcells.
-That's why (Docker) images-based BOSH Release are generally meant for
-development and testing.
-
-Plus, the [original release][kong-release] is non-hermetic, because it is
-based on the `kong:latest` Docker image. For BOSH deployments relying on such
-non-hermetic build, there is risk of being non-reproductible. Given a same set
-of Release and Stemcell versions, a braking change in the `kong:latest` image
-could break your Kong deployment from staging to production because you're
-never 100% sure that you're pushing in production the same image that has been
-validated in your staging environment.
-
-As we generally want to get closer from production, we've gone back here to a
-conventional BOSH packaging for a more hermetic build that compiles what's
-necessary on top of the BOSH Stemcell.
-
 ## Usage
 
 This release doesn't publish its blobs yet. This means you have to download
@@ -112,7 +86,35 @@ integrates Kong with Cassandra should be pretty straightforward, just reading
 [cassandra-release]: https://github.com/orange-cloudfoundry/cassandra-boshrelease
 [cassandra-config-doc]: https://docs.konghq.com/0.11.x/configuration/#cassandra-settings
 
+## Design notes
+
+This is a forked version of the Community's [kong-boshrelease][kong-release],
+that sticks to a compiled install design, over a Docker-based design. Here we
+have fixed many minor glitches for Kong to actually work, and in terms of BOSH
+Release authoring, we have generally brought more best practice in.
+
+[kong-release]: https://github.com/cloudfoundry-community/kong-boshrelease
+
+Here we have abandoned the Docker container design, because it breaks the
+general Operating System update workflow proposed by BOSH with Stemcells.
+That's why (Docker) images-based BOSH Release are generally meant for
+development and testing.
+
+Plus, the [original release][kong-release] is non-hermetic, because it is
+based on the `kong:latest` Docker image. For BOSH deployments relying on such
+non-hermetic build, there is risk of being non-reproductible. Given a same set
+of Release and Stemcell versions, a braking change in the `kong:latest` image
+could break your Kong deployment from staging to production because you're
+never 100% sure that you're pushing in production the same image that has been
+validated in your staging environment.
+
+As we generally want to get closer from production, we've gone back here to a
+conventional BOSH packaging for a more hermetic build that compiles what's
+necessary on top of the BOSH Stemcell.
+
 ## Contributing
+
+Pull requests are welcome!
 
 As a notice to release authors that contribute here, this BOSH Release is
 based on a [Git LFS blobstore][git-lfs-blobstore]. This is quite uncommon, so
@@ -123,3 +125,10 @@ please read [Ruben Koster's post][git-lfs-blobstore] first before continuing.
 Contrarily to common practice with BOSH, blobs are commited to Git, because
 they are backed by Git LFS, and `bosh sync-blobs` is no more necessary because
 you get the correct final blobs with `git pull`.
+
+## Author and License
+
+Copyright © 2018, Benjamin Gandon
+
+Like the rest of BOSH, this Kong CE BOSH Release is released under the terms
+of the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0).
