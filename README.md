@@ -1,6 +1,18 @@
-# BOSH release for kong
+# BOSH Release for Kong API Gateway (Gstack fork)
 
-This BOSH release and deployment manifest deploy a cluster of kong.
+This BOSH release and deployment manifest deploy a cluster of [Kong][kong-ce].
+
+[kong-ce]: https://konghq.com/kong-community-edition/
+
+## Notice
+
+This is a forked version of the Community's [kong-boshrelease][kong-release]
+with fixes and best practice implemented in terms of authoring a BOSH Release.
+
+[kong-release]: https://github.com/cloudfoundry-community/kong-boshrelease
+
+Here we have abandoned the Docker container design, going back to conventional
+BOSH packaging for a more hermetic build that recompiles what's necessary.
 
 ## Usage
 
