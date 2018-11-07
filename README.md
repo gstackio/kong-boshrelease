@@ -1,18 +1,43 @@
 # BOSH Release for Kong Community Edition (CE)
 
-This BOSH release and deployment manifest deploy a cluster of [Kong][kong-ce].
+This BOSH Release is the fastest way to get up and running with a cluster of
+[Kong Community Edition (CE)][kong-ce] API Gateway when you're using BOSH.
 
 [kong-ce]: https://konghq.com/kong-community-edition/
 
+This BOSH Release provides all the necessary binaries, configuration
+templates, and startup scripts for converging Kong clusters (which is
+basically the point of a BOSH Release). Plus, we also provide here a standard
+[deployment manifest][depl-manifest] to help you deploy your first Kong API
+Gateway easily.
+
+[depl-manifest]: ./manifests/kong.yml
+
 ## Notice
 
-This is a forked version of the Community's [kong-boshrelease][kong-release]
-with fixes and best practice implemented in terms of authoring a BOSH Release.
+This is a forked version of the Community's [kong-boshrelease][kong-release],
+that sticks to a compiled install design, over a Docker-based design. Here we
+have fixed many minor glitches for Kong to actually work, and in terms of BOSH
+Release authoring, we have generally brought more best practice in.
 
 [kong-release]: https://github.com/cloudfoundry-community/kong-boshrelease
 
-Here we have abandoned the Docker container design, going back to conventional
-BOSH packaging for a more hermetic build that recompiles what's necessary.
+Here we have abandoned the Docker container design, because it breaks the
+general Operating System update workflow proposed by BOSH with Stemcells.
+That's why (Docker) images-based BOSH Release are generally meant for
+development and testing.
+
+Plus, the [original release][kong-release] is non-hermetic, because it is
+based on the `kong:latest` Docker image. For BOSH deployments relying on such
+non-hermetic build, there is risk of being non-reproductible. Given a same set
+of Release and Stemcell versions, a braking change in the `kong:latest` image
+could break your Kong deployment from staging to production because you're
+never 100% sure that you're pushing in production the same image that has been
+validated in your staging environment.
+
+As we generally want to get closer from production, we've gone back here to a
+conventional BOSH packaging for a more hermetic build that compiles what's
+necessary on top of the BOSH Stemcell.
 
 ## Usage
 
