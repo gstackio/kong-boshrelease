@@ -1,6 +1,17 @@
+# Depreciation notice
+
+This BOSH Release has been superseded by the
+[gk-kong-boshrelease](https://github.com/gstackio/gk-kong-boshrelease) which
+brings solutions to the numerous [issues](./issues) raised here, and provides
+newer versions of Kong.
+
+You should definitely go there and not care about this temporary fork project.
+
+
+
 # BOSH Release for Kong Community Edition (CE)
 
-This BOSH Release is the fastest way to get up and running with a cluster of
+This BOSH Release was the fastest way to get up and running with a cluster of
 [Kong Community Edition (CE)][kong-ce] API Gateway when you're using BOSH.
 
 [kong-ce]: https://konghq.com/kong-community-edition/
@@ -15,28 +26,16 @@ Gateway easily.
 
 ## Usage
 
-This release doesn't publish its blobs yet. This means you have to download
-them manually and bundle/upload your release by yourself. No big deal! To help
-you doing that, and following BOSH best practice, we provide an `add-blobs.sh`
-script to fetch, verify and add the blobs where they should be.
-
-```
-export BOSH_ENVIRONMENT=<bosh-alias>
-git clone https://github.com/gstackio/kong-ce-boshrelease.git
-cd kong-ce-boshrelease
-./scripts/add-blobs.sh
-bosh create-release --force
-bosh upload-release
-```
-
 This repository includes base manifests and operator files. They can be used
-for initial deployments and subsequently used for updating your deployments:
+for initial deployments and subsequently used for updating your deployments.
 
 ```
+git lfs version   # check that you have the 'git-lfs' extension
+git clone https://github.com/gstackio/kong-ce-boshrelease.git
+
 export BOSH_ENVIRONMENT=<bosh-alias>
 export BOSH_DEPLOYMENT=kong
-cd kong-ce-boshrelease
-bosh deploy manifests/kong.yml
+bosh deploy kong-ce-boshrelease/manifests/kong.yml
 ```
 
 If your BOSH does not have Credhub/Config Server (but it should), then
@@ -59,11 +58,16 @@ bosh deploy manifests/kong.yml
 
 ### Clustering
 
-Clustering Kong API Gateways should work out of the box, with a mere updating
-of the [`instances:` property][instances-prop] in the deployment manifest.
-Kong nodes will synchronize their state on the shared PostgreSQL database,
-with [some caching implemented][db_update_frequency_doc].
+Clustering Kong API Gateways is unfortunately [flawed](./releases/tag/v1.0.0).
+This issue has been fixed in the new “reboot”
+[gk-kong-boshrelease][gk_kong_boshrelease] project.
 
+Normally it should have worked out of the box, with a mere updating of the
+[`instances:` property][instances-prop] in the deployment manifest. Kong nodes
+will synchronize their state on the shared PostgreSQL database, with
+[some caching implemented][db_update_frequency_doc].
+
+[gk_kong_boshrelease]: https://github.com/gstackio/gk-kong-boshrelease
 [instances-prop]: https://github.com/gstackio/kong-ce-boshrelease/blob/v1.0.0/manifests/kong.yml#L7
 [db_update_frequency_doc]: https://docs.konghq.com/0.11.x/clustering/#1-db_update_frequency-default-5s
 
@@ -127,13 +131,18 @@ please read [Ruben Koster's post][git-lfs-blobstore] first before continuing.
 
 [git-lfs-blobstore]: https://starkandwayne.com/blog/bosh-releases-with-git-lfs/
 
-Contrarily to common practice with BOSH, blobs are commited to Git, because
-they are backed by Git LFS, and `bosh sync-blobs` is no more necessary because
-you get the correct final blobs with `git pull`.
+Blobs can be commited to Git here because they are backed by Git LFS. Using
+`bosh sync-blobs` is thus no more necessary because you get the correct final
+blobs with a mere `git pull`.
+
+Whenever you need to update the blobs, you'll find in the
+`scripts/add-blobs.sh` script the way we have been fetching them. This helps
+in fetching any newer versions of the softwares. The `add-blobs.sh` script is
+also best practice in authoring BOSH Releases.
 
 ## Author and License
 
-Copyright © 2018, Benjamin Gandon
+Copyright © 2018, Benjamin Gandon, Gstack
 
 Like the rest of BOSH, this Kong CE BOSH Release is released under the terms
 of the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0).
